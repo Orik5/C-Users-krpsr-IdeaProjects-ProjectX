@@ -4,11 +4,9 @@ import com.dvoretskyi.model.Bicycle;
 import com.dvoretskyi.model.Person;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 /**
  * Created by Orest on 5/25/2018.
@@ -79,7 +77,6 @@ public class Executor {
 //    entityManager.createQuery("select p from Person as p").
 //        getResultList().forEach(System.out::println);
 
-
     //Input values
 //    Scanner scanner = new Scanner(System.in);
 //    System.out.println("Input name of person");
@@ -98,24 +95,21 @@ public class Executor {
 //
 //    System.out.println(person);
 
-
-
     //NamedQuery!!!!!! Very fast. Fastly then query!!
     //entityManager.createNamedQuery("getAllPersons").getResultList().forEach(System.out::println);
-
-
 
     // Set bicycle to person id
 
 //    Bicycle bicycle = new Bicycle("GT","Blue","12342");
 //    bicycle.setPerson(entityManager.find(Person.class,19));
 //    entityManager.persist(bicycle);
-  Random random = new Random();
-    List <Person> personList = entityManager.createNamedQuery("getAllPersons").getResultList();
-    String[] bicycleModels ={"GT","WhiteR","WINNER","bmx"};
-    for(int i =0;i<100;i++){
+    Random random = new Random();
+    List<Person> personList = entityManager.createNamedQuery("getAllPersons").getResultList();
+    String[] bicycleModels = {"GT", "WhiteR", "WINNER", "bmx"};
+    for (int i = 0; i < 100; i++) {
       entityManager.persist(new Bicycle(bicycleModels
-          [random.nextInt(bicycleModels.length)],personList.get(random.nextInt(personList.size()))));
+          [random.nextInt(bicycleModels.length)],
+          personList.get(random.nextInt(personList.size()))));
     }
     entityManager.getTransaction().commit();
     entityManager.close();
